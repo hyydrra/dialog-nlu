@@ -87,7 +87,7 @@ class BaseJointTransformerModel(NLUModel):
         
     def predict_slots_intent(self, x, slots_vectorizer, intent_vectorizer, remove_start_end=True,
                              include_intent_prob=False):
-        print("/models/base_joint_trans.py")
+#         print("/models/base_joint_trans.py")
         valid_positions = x["valid_positions"]
         x["valid_positions"] = self.prepare_valid_positions(valid_positions)
         y_slots, y_intent = self.predict(x)
@@ -101,6 +101,12 @@ class BaseJointTransformerModel(NLUModel):
             intents = np.array([(intent_vectorizer.inverse_transform([np.argmax(i)])[0], round(float(np.max(i)), 4)) for i in y_intent])
         return slots, intents
     
+     def predict_intent1(self, x, slots_tokenizer, intents_label_encoder):
+        valid_positions = x["valid_positions"]
+        x["valid_positions"] = self.prepare_valid_positions(valid_positions)
+        y_slots, y_intent = self.predict(x)
+        intents = np.array([(intent_vectorizer.inverse_transform([np.argmax(i)])[0], round(float(np.max(i)), 4)) for i in y_intent])
+        return y_intent, intents
     
     def save_to_path(self, model_path, trans_model_name):
         self.model_params["class"] = self.__class__.__name__

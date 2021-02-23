@@ -55,6 +55,7 @@ class NLUModel:
         return intents, slots
     
     def predict_intent1(self, x, slots_tokenizer, intents_label_encoder):
+        print(x)
         if len(x.shape) == 1:
             x = x[np.newaxis, ...]
         y1, y2 = self.predict(x)

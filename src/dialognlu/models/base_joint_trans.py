@@ -87,6 +87,7 @@ class BaseJointTransformerModel(NLUModel):
         
     def predict_slots_intent(self, x, slots_vectorizer, intent_vectorizer, remove_start_end=True,
                              include_intent_prob=False):
+        print("/models/base_joint_trans.py")
         valid_positions = x["valid_positions"]
         x["valid_positions"] = self.prepare_valid_positions(valid_positions)
         y_slots, y_intent = self.predict(x)

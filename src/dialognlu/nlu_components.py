@@ -138,6 +138,22 @@ class JointNLU(NLU):
         }
         return response
 
+    def predict_intents(self, utterance: str):
+        tokens = utterance.split()
+        x = self.text_vectorizer.transform([utterance])
+        predicted_tags, predicted_intents = self.model.predict_slots_intent(x, self.tags_vectorizer, 
+                    self.intents_label_encoder, remove_start_end=True, include_intent_prob=True)
+        slots = convert_to_slots(predicted_tags[0])
+        slots = [{"slot": slot, "start": start, "end": end, "value": ' '.join(tokens[start:end + 1])} for slot, start, end in slots]
+        response = {
+            "intent": {
+                    "name": predicted_intents[0][0].strip(),
+                    "confidence": predicted_intents[0][1]
+                    },
+            "slots": slots
+        }
+        return predicted_intents
+    
     def evaluate(self, dataset: NluDataset):
         print('Vectorizing validation text ...')
         X = self.text_vectorizer.transform(dataset.text)

@@ -53,3 +53,10 @@ class NLUModel:
                     slot.append(slots_tokenizer.index_word[i])
             slots.append(slot[:len(x[i])+1])
         return intents, slots
+    
+    def predict_intent1(self, x, slots_tokenizer, intents_label_encoder):
+        if len(x.shape) == 1:
+            x = x[np.newaxis, ...]
+        y1, y2 = self.predict(x)
+        intents = np.array([intents_label_encoder.inverse_transform([np.argmax(y2[i])])[0] for i in range(y2.shape[0])])
+        return intents, y2

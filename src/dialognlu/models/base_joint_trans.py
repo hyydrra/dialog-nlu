@@ -109,8 +109,8 @@ class BaseJointTransformerModel(NLUModel):
         print(top_intents_indexes)
         for index in top_intents_indexes:
             print(index)
-            print(intent_vectorizer.inverse_transform(int(index)))
-#             intents.append([intent_vectorizer.inverse_transform(index)[0], round(float(y_intent[0][index]), 4)])
+            print(intent_vectorizer.inverse_transform(np.int64((index)))
+            intents.append([intent_vectorizer.inverse_transform(np.int64(index))[0], round(float(y_intent[0][index]), 4)])
             intents.append([index, round(float(y_intent[0][index]), 4)])
         print(intents)
         return intents, intents

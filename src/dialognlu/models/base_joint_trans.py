@@ -100,7 +100,7 @@ class BaseJointTransformerModel(NLUModel):
             intents = np.array([(intent_vectorizer.inverse_transform([np.argmax(i)])[0], round(float(np.max(i)), 4)) for i in y_intent])
         return slots, intents
     
-    def predict_intent1(self, x, slots_tokenizer, intents_label_encoder):
+    def predict_intent1(self, x, slots_vectorizer, intent_vectorizer):
         valid_positions = x["valid_positions"]
         x["valid_positions"] = self.prepare_valid_positions(valid_positions)
         y_slots, y_intent = self.predict(x)

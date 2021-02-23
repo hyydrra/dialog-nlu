@@ -141,7 +141,7 @@ class JointNLU(NLU):
     def predict_intents(self, utterance: str):
         tokens = utterance.split()
         x = self.text_vectorizer.transform([utterance])
-        intents, y2 = self.model.predict_slots_intent(x, self.tags_vectorizer, 
+        intents, y2 = self.model.predict_intent1(x, self.tags_vectorizer, 
                     self.intents_label_encoder, remove_start_end=True, include_intent_prob=True)
         return intents, y2
     

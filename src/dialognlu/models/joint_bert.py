@@ -98,6 +98,7 @@ class JointBertModel(NLUModel):
         
     def predict_slots_intent(self, x, slots_vectorizer, intent_vectorizer, remove_start_end=True,
                              include_intent_prob=False):
+        print("/models/joint_bert.py")
         valid_positions = x["valid_positions"]
         x["valid_positions"] = self.prepare_valid_positions(valid_positions)
         y_slots, y_intent = self.predict(x)

@@ -142,7 +142,7 @@ class JointNLU(NLU):
         tokens = utterance.split()
         x = self.text_vectorizer.transform([utterance])
         intents, y2 = self.model.predict_intent1(x, self.tags_vectorizer, self.intents_label_encoder)
-        return intents, y2
+        return intents
     
     def evaluate(self, dataset: NluDataset):
         print('Vectorizing validation text ...')

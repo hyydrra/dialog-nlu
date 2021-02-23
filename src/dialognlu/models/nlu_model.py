@@ -38,6 +38,7 @@ class NLUModel:
         return new_model
     
     def predict_slots_intent(self, x, slots_tokenizer, intents_label_encoder):
+        print("kir",x)
         if len(x.shape) == 1:
             x = x[np.newaxis, ...]
         y1, y2 = self.predict(x)

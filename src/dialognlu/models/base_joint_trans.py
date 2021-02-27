@@ -100,15 +100,14 @@ class BaseJointTransformerModel(NLUModel):
             intents = np.array([(intent_vectorizer.inverse_transform([np.argmax(i)])[0], round(float(np.max(i)), 4)) for i in y_intent])
         return slots, intents
     
-    def predict_intent1(self, x, slots_vectorizer, intent_vectorizer):
+    def predict_intent1(self, x, slots_vectorizer, intent_vectorizer, num_intents):
         valid_positions = x["valid_positions"]
         x["valid_positions"] = self.prepare_valid_positions(valid_positions)
         y_slots, y_intent = self.predict(x)
-        top_intents_indexes = (-y_intent[0]).argsort()[:4]
+        top_intents_indexes = (-y_intent[0]).argsort()[:num_intents]
         intents = []
         for index in top_intents_indexes:
             intents.append([intent_vectorizer.inverse_transform([np.int64(index)])[0], round(float(y_intent[0][index]), 4)])
-            intents.append([index, round(float(y_intent[0][index]), 4)])
         return intents, intents
     
     def save_to_path(self, model_path, trans_model_name):

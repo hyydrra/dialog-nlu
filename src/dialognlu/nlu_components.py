@@ -138,10 +138,10 @@ class JointNLU(NLU):
         }
         return response
 
-    def predict_intents(self, utterance: str):
+    def predict_intents(self, utterance: str, num_intents):
         tokens = utterance.split()
         x = self.text_vectorizer.transform([utterance])
-        intents, y2 = self.model.predict_intent1(x, self.tags_vectorizer, self.intents_label_encoder)
+        intents, y2 = self.model.predict_intent1(x, self.tags_vectorizer, self.intents_label_encoder, num_intents)
         return intents
     
     def evaluate(self, dataset: NluDataset):

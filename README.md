@@ -1,8 +1,10 @@
 # Dialog System NLU
 Dialog NLU library that contains Tensorflow and Keras Implementation of the state of the art researches in Dialog System NLU. 
-
 It is built on Tensorflow 2 and Huggingface Transformers library for better models coverage and other languages support.
 
+# whats' new?
+you can get multiple top intents with their scores using "predict_intents" function.
+see jupyter notbook for a farsi question answering system.
 
 ## Implemented Papers
 ### NLU Papers
